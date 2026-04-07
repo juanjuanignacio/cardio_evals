@@ -1,0 +1,33 @@
+# Core dependencies
+pandas>=1.5.0
+numpy>=1.23.0
+pymongo>=4.3.0
+
+# Machine Learning & NLP
+sentence-transformers>=2.2.0
+transformers>=4.30.0
+torch>=2.0.0
+pydantic>=2.0.0
+vllm>=0.3.0
+
+# LangChain
+langchain>=0.1.0
+langchain-ollama>=0.0.1
+langchain-core>=0.1.0
+
+# Data Processing & Analysis
+tqdm>=4.65.0
+jupyter>=1.0.0
+ipython>=8.0.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+scipy>=1.10.0
+
+# Utilities
+python-dotenv>=1.0.0
+nbformat>=5.9.0
+
+# Optional: For GPU support, install PyTorch with CUDA
+# Visit https://pytorch.org/get-started/locally/ for installation instructions
+# Example for CUDA 12.6:
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126

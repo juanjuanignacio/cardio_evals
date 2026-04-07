@@ -1,0 +1,97 @@
+# Environment variables
+.env
+*.env
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+*.ipynb_backup
+
+# Data files
+*.csv
+*.parquet
+*.h5
+*.hdf5
+*.db
+*.sqlite
+*.sqlite3
+
+# Model files
+*.pt
+*.pth
+*.bin
+*.ckpt
+*.safetensors
+models/
+checkpoints/
+
+# Output directories
+output/
+outputs/
+results/
+replicas_*/
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# MongoDB
+*.mdb
+*.ldb
+
+# Word/Office documents (drafts should not be in code repo)
+*.docx
+*.doc
+*.pptx
+*.ppt
+*.xlsx
+*.xls
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.cache
+
+# OS
+Thumbs.db
+.DS_Store
