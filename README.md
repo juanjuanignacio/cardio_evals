@@ -1,4 +1,4 @@
-# DRAGQA: RAG-based Question Answering System for Cardiovascular Research
+# RAGQA: RAG-based Question Answering System for Cardiovascular Research
 
 This repository contains the code and analysis for the DRAGQA (Domain-specific Retrieval-Augmented Generation for Question Answering) paper, which implements and evaluates a RAG-based question answering system for cardiovascular research.
 
