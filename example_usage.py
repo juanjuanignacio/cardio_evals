@@ -14,7 +14,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 load_dotenv()
 
 # Import RAG functions
-from RAG_Mongodb_gemma2 import (
+from RAG_Mongodb import (
     get_mongo_client,
     get_search_result,
     create_rag_prompt,

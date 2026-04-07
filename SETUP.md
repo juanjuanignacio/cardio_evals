@@ -63,7 +63,7 @@ ollama pull deepseek-r1:7b
 Test the RAG system:
 
 ```bash
-python RAG_Mongodb_gemma2.py
+python RAG_Mongodb.py
 ```
 
 Test evaluation:
@@ -108,7 +108,7 @@ paper_code/
 ├── SETUP.md              # This file
 ├── requirements.txt
 ├── clean_notebooks.sh
-├── RAG_Mongodb_gemma2.py
+├── RAG_Mongodb.py
 ├── RAG_poblate_db.py
 ├── LLM_answer_supervised_evaluation_strucutred_output.py
 ├── evaluator_variability_vllm_*.py

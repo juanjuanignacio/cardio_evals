@@ -14,7 +14,7 @@ The repository contains:
 
 ```
 paper_code/
-├── RAG_Mongodb_gemma2.py              # Main RAG system implementation
+├── RAG_Mongodb.py                     # Main RAG system implementation
 ├── RAG_poblate_db.py                  # Database population script
 ├── LLM_answer_supervised_evaluation_strucutred_output.py  # Supervised evaluation
 ├── evaluator_variability_vllm_batch.py                    # Batch evaluation (vLLM)
@@ -114,13 +114,13 @@ export MONGO_URI="your-mongodb-uri"
 export MODEL_NAME="google/gemma-2-2b-it"
 
 # Run the RAG system
-python RAG_Mongodb_gemma2.py
+python RAG_Mongodb.py
 ```
 
 You can modify the query in the `main()` function or import the functions for programmatic use:
 
 ```python
-from RAG_Mongodb_gemma2 import get_search_result, create_rag_prompt, generate_answer
+from RAG_Mongodb import get_search_result, create_rag_prompt, generate_answer
 
 # Query the system
 query = "What are the behaviours of neutrophils?"
@@ -250,14 +250,6 @@ If you use this code in your research, please cite:
 - Verify models are pulled: `ollama pull <model-name>`
 - Increase `max_retries` in evaluation scripts
 - Check MongoDB has sufficient storage
-
-## License
-
-[Specify your license here]
-
-## Contact
-
-For questions or issues, please open an issue on GitHub or contact [your-email].
 
 ## Acknowledgments
 
