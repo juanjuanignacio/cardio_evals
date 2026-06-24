@@ -7,8 +7,9 @@ This repository contains the code and analysis for the DRAGQA (Domain-specific R
 The repository contains:
 - **RAG system implementation** using MongoDB vector search and LLMs
 - **Evaluation framework** for assessing answer quality
-- **Variability analysis** of LLM evaluators
-- **Statistical analysis notebooks** for paper results
+- **Variability analysis** of LLM evaluators (Figure 5)
+- **Statistical analysis notebooks** for paper results (Figures 1, 2, 3a–b, Supplementary)
+- **Mechanistic interpretability** of the self-preference bias (Figures 3c–d, Figure 4) — see [`mechanistic/`](mechanistic/README.md)
 
 ## Repository Structure
 
@@ -25,6 +26,18 @@ paper_code/
 ├── evaluator_variability_comparison.ipynb                 # Comparison across settings
 ├── statistics_RAGQA_2.ipynb                              # Main statistical analysis
 ├── statistics_RAGQA_2linguistic.ipynb                    # Linguistic analysis
+├── mechanistic/                                          # Probing, patching, steering, shuffling
+│   ├── 01_extract_hidden_states.py
+│   ├── 02_train_probes.py                                # Figure 4a
+│   ├── 03_geometry_analysis.py                           # Figure 4b
+│   ├── 04_activation_patching.py                         # Methods: locates layer 15
+│   ├── 05_steering_vectors.py                            # Figure 4c
+│   ├── 06_shuffle_within_tertile.py                      # Figure 3c
+│   ├── 07_cross_tertile_shuffle.py                       # Figure 3d
+│   ├── notebooks/steering_plots.ipynb                    # Plot generation for the above
+│   ├── src/                                              # Library helpers
+│   ├── config/{config,models}.yaml
+│   └── README.md
 ├── .env.example                                          # Configuration template
 ├── .gitignore                                            # Git ignore rules
 └── README.md                                             # This file
@@ -174,6 +187,30 @@ Available notebooks:
 - `evaluator_variability_analysis_seed.ipynb`: Impact of random seeds
 - `evaluator_variability_comparison.ipynb`: Cross-condition comparison
 
+### Mechanistic Interpretability (Fig 3c–d, Fig 4)
+
+The `mechanistic/` subpackage reproduces the probing, activation patching, steering, and
+question–response shuffling analyses on `Llama3.1:8b`. It is self-contained (its own
+`src/` helpers and YAML config) and requires only the `HF_TOKEN` environment variable
+in addition to the standard `requirements.txt`.
+
+Quick start:
+
+```bash
+cd mechanistic
+python 01_extract_hidden_states.py       # ~25 min on a single H100
+python 02_train_probes.py                # Figure 4a
+python 03_geometry_analysis.py           # Figure 4b
+python 04_activation_patching.py         # Methods: localises bias to layer 15
+python 05_steering_vectors.py            # Figure 4c
+python 06_shuffle_within_tertile.py      # Figure 3c
+python 07_cross_tertile_shuffle.py       # Figure 3d
+jupyter notebook notebooks/steering_plots.ipynb   # Render all figures
+```
+
+See [`mechanistic/README.md`](mechanistic/README.md) for the full pipeline, outputs, and
+hardware requirements.
+
 ## Key Features
 
 ### RAG System
@@ -225,6 +262,7 @@ If you use this code in your research, please cite:
 | `USE_GPU` | Enable GPU inference | `true` |
 | `OLLAMA_BASE_URL` | Ollama API endpoint | `http://localhost:11434` |
 | `TEST_QUERY` | Test query for validation | (optional) |
+| `HF_TOKEN` | HuggingFace token (mechanistic/ scripts: gated model + dataset access) | Required for `mechanistic/` |
 
 ## Troubleshooting
 

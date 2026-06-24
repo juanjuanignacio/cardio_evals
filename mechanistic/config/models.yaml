@@ -1,0 +1,57 @@
+# Per-model configuration for TransformerLens loading
+# TransformerLens model names: https://transformerlensorg.github.io/TransformerLens/
+
+models:
+  llama-3.1-8b:
+    tl_name: "meta-llama/Meta-Llama-3.1-8B-Instruct"
+    architecture: "LLaMA"
+    chat_template: "llama3"
+    # GQA: 32 Q heads, 8 KV heads → 4 Q heads share each KV head
+    gqa_groups: 4
+    # TL hook for attention head output (all 32 heads)
+    attn_hook: "blocks.{layer}.attn.hook_result"
+    # TL hook for residual stream after each layer
+    resid_hook: "blocks.{layer}.hook_resid_post"
+    mlp_hook: "blocks.{layer}.hook_mlp_out"
+    attn_out_hook: "blocks.{layer}.hook_attn_out"
+    # TL hook for embedding output
+    embed_hook: "hook_embed"
+    pos_embed_hook: "hook_pos_embed"
+
+  mistral-7b:
+    tl_name: "mistralai/Mistral-7B-Instruct-v0.3"
+    architecture: "Mistral"
+    chat_template: "mistral"
+    gqa_groups: 4
+    attn_hook: "blocks.{layer}.attn.hook_result"
+    resid_hook: "blocks.{layer}.hook_resid_post"
+    mlp_hook: "blocks.{layer}.hook_mlp_out"
+    attn_out_hook: "blocks.{layer}.hook_attn_out"
+    embed_hook: "hook_embed"
+    pos_embed_hook: "hook_pos_embed"
+
+  qwen2-7b:
+    tl_name: "Qwen/Qwen2-7B-Instruct"
+    architecture: "Qwen2"
+    chat_template: "qwen"
+    gqa_groups: 7
+    # Note: may require from_pretrained_no_processing=True
+    attn_hook: "blocks.{layer}.attn.hook_result"
+    resid_hook: "blocks.{layer}.hook_resid_post"
+    mlp_hook: "blocks.{layer}.hook_mlp_out"
+    attn_out_hook: "blocks.{layer}.hook_attn_out"
+    embed_hook: "hook_embed"
+    pos_embed_hook: "hook_pos_embed"
+
+  gemma-2-9b:
+    tl_name: "google/gemma-2-9b-it"
+    architecture: "Gemma2"
+    chat_template: "gemma"
+    gqa_groups: 2
+    # Gemma-2 uses logit softcapping — TL handles this
+    attn_hook: "blocks.{layer}.attn.hook_result"
+    resid_hook: "blocks.{layer}.hook_resid_post"
+    mlp_hook: "blocks.{layer}.hook_mlp_out"
+    attn_out_hook: "blocks.{layer}.hook_attn_out"
+    embed_hook: "hook_embed"
+    pos_embed_hook: "hook_pos_embed"

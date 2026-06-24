@@ -113,8 +113,36 @@ paper_code/
 ├── LLM_answer_supervised_evaluation_strucutred_output.py
 ├── evaluator_variability_vllm_*.py
 ├── *.ipynb               # Analysis notebooks
+├── mechanistic/          # Probing, steering, shuffling (Fig 3c–d, Fig 4)
 └── replicas_vllm_deterministic/  # Output directory (created automatically)
 ```
+
+## Mechanistic Interpretability Setup (`mechanistic/`)
+
+The mechanistic subpackage runs `Llama3.1:8b` locally via `TransformerLens`. It needs:
+
+1. **A HuggingFace token** for the gated Llama-3.1-8B-Instruct model. After accepting the
+   model licence on HuggingFace, set it in `.env`:
+
+   ```bash
+   echo "HF_TOKEN=hf_..." >> .env
+   ```
+
+2. **A CUDA GPU with ≥40 GB VRAM** (H100 / A100). Extraction and steering on the primary
+   8B model is single-GPU. The optional 70B comparison models in
+   `mechanistic/config/config.yaml` require 4-bit AWQ quantization or 2× H100s.
+
+3. **`mechanistic/`-specific dependencies** (already in `requirements.txt`):
+   `transformer-lens`, `datasets`, `h5py`, `scikit-learn`, `statsmodels`, `plotly`,
+   `kaleido`, `accelerate`.
+
+Verify the install before launching the pipeline:
+
+```bash
+python -c "import transformer_lens, h5py, plotly, sklearn, statsmodels; print('OK')"
+```
+
+See `mechanistic/README.md` for the full pipeline and per-script outputs.
 
 ## Next Steps
 
@@ -122,3 +150,4 @@ paper_code/
 2. Run the analysis notebooks to reproduce paper results
 3. Customize evaluation parameters in the scripts
 4. Explore variability analysis results
+5. Reproduce Figures 3c–d and Figure 4 via `mechanistic/`
